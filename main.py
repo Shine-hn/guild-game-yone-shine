@@ -11,6 +11,16 @@ ROOMS = {
     },
 }
 
+ERRORS = {
+    "no_exit": "You cannot go {direction} from here. Look at the room description for the exits.",
+    "unknown_command": "error. you can't use this command. Shoud you use {command}. ",
+    "unknown_item": "error. bad item name. Are you crasy? Try type {item}.",
+    "no_money": "NO money! this item is {price}. Try check!",
+    "empty_command": "Hey! Try you type!",
+    "already_have": "Wow! You have already this {item}. Try check! ",
+    "bag_full": "You bag is {limit}. Try check. "
+}
+
 
 def main():
     current = "hall"
