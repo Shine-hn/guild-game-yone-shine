@@ -1,3 +1,4 @@
+
 """A tiny text adventure. Grow this world with your team!"""
 
 ROOMS = {
@@ -12,13 +13,9 @@ ROOMS = {
 }
 
 ERRORS = {
+    "empty_command": "You didn't type anything. Type 'go <direction>' to move, or 'quit' to stop.",
     "no_exit": "You cannot go {direction} from here. Look at the room description for the exits.",
-    "unknown_command": "error. you can't use this command. Shoud you use {command}. ",
-    "unknown_item": "error. bad item name. Are you crasy? Try type {item}.",
-    "no_money": "NO money! this item is {price}. Try check!",
-    "empty_command": "Hey! Try you type!",
-    "already_have": "Wow! You have already this {item}. Try check! ",
-    "bag_full": "You bag is {limit}. Try check. "
+    "unknown_command": "I don't know the command '{command}'. Type 'go <direction>' to move.",
 }
 
 
@@ -29,10 +26,12 @@ def main():
         print()
         print(ROOMS[current]["description"])
         command = input("> ").strip().lower()
-        if command == "quit":
+        if command == "":
+            print(ERRORS["empty_command"])
+        elif command == "quit":
             print("Goodbye!")
             break
-        if command.startswith("go "):
+        elif command.startswith("go "):
             direction = command[3:]
             next_room = ROOMS[current]["exits"].get(direction)
             if next_room:
@@ -40,7 +39,7 @@ def main():
             else:
                 print(ERRORS["no_exit"].format(direction=direction))
         else:
-            print("I don't understand that.")
+            print(ERRORS["unknown_command"].format(command=command))
 
 
 if __name__ == "__main__":
