@@ -38,7 +38,7 @@ def main():
             if next_room:
                 current = next_room
             else:
-                print("You cannot go that way.")
+                print(ERRORS["no_exit"].format(direction=direction))
         else:
             print("I don't understand that.")
 
