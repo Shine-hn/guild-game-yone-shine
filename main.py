@@ -1,3 +1,4 @@
+
 """A tiny text adventure. Grow this world with your team!"""
 
 ROOMS = {
@@ -11,6 +12,12 @@ ROOMS = {
     },
 }
 
+ERRORS = {
+    "empty_command": "You didn't type anything. Type 'go <direction>' to move, or 'quit' to stop.",
+    "no_exit": "You cannot go {direction} from here. Look at the room description for the exits.",
+    "unknown_command": "I don't know the command '{command}'. Type 'go <direction>' to move.",
+}
+
 
 def main():
     current = "hall"
@@ -19,18 +26,20 @@ def main():
         print()
         print(ROOMS[current]["description"])
         command = input("> ").strip().lower()
-        if command == "quit":
+        if command == "":
+            print(ERRORS["empty_command"])
+        elif command == "quit":
             print("Goodbye!")
             break
-        if command.startswith("go "):
+        elif command.startswith("go "):
             direction = command[3:]
             next_room = ROOMS[current]["exits"].get(direction)
             if next_room:
                 current = next_room
             else:
-                print("You cannot go that way.")
+                print(ERRORS["no_exit"].format(direction=direction))
         else:
-            print("I don't understand that.")
+            print(ERRORS["unknown_command"].format(command=command))
 
 
 if __name__ == "__main__":
