@@ -1,3 +1,5 @@
+
+
 """A tiny text adventure. Grow this world with your team!"""
 
 ROOMS = {
@@ -14,16 +16,22 @@ ROOMS = {
 ERRORS = {
     "empty_command": "You didn't type anything. Type 'help' to see what you can type.",
     "no_exit": "You cannot go {direction} from here. Look at the room description for the exits.",
-    "unknown_command": "I don't know the command '{command}'. Type 'help' to see what you can type.",
+    "unknown_command": "I don't know the command '{command}'. Type 'help' to see what you can do.",
 }
 
 COMMANDS = {
     "go <direction>": "move to the next room, like 'go north'",
+    "help": "show the commands you can type",
+    "quit": "stop playing and leave the game",
     "run <direction>": "rush to the next room, like 'run south'",
     "wait": "stay in this room for a moment",
-    "help": "show the commands you can type",
-    "quit": "stop the game",
 }
+
+
+def show_help():
+    print("You can type:")
+    for command, text in COMMANDS.items():
+        print(f"  {command:<16} {text}")
 
 
 def show_help():
@@ -41,6 +49,9 @@ def main():
         command = input("> ").strip().lower()
         if command == "":
             print(ERRORS["empty_command"])
+        elif command == "help":
+            for name, text in COMMANDS.items():
+                print(f"  {name:<16} {text}")
         elif command == "quit":
             print("Goodbye!")
             break
